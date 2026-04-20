@@ -522,3 +522,23 @@ If Kronos saved you time, consider:
 *The messenger of the gods is now the time to ship.*
 
 </div>
+
+## ❓ FAQ
+
+**Q: How much does Kronos cost?**  
+Kronos is free and open-source. You only pay for OpenAI API usage (~$0.004 per release).
+
+**Q: Do I need conventional commits?**  
+Not required, but recommended. Kronos works with any commit messages.
+
+**Q: Which Node.js version is required?**  
+Node.js 18 or higher.
+
+**Q: Can I use Kronos in CI/CD pipelines?**  
+Yes! Set `OPENAI_API_KEY` as an environment variable and run `kronos ship --release $VERSION`.
+
+**Q: Is my source code sent to OpenAI?**  
+No. Only your commit messages are sent — never your source code.
+
+**Q: Can I generate content for specific platforms only?**  
+Yes: `kronos ship --release v1.0.0 --platforms twitter,linkedin`
