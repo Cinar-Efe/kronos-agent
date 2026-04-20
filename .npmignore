@@ -1,4 +1,4 @@
-src/
+﻿src/
 tests/
 examples/
 .github/
@@ -8,6 +8,7 @@ CONTRIBUTING.md
 CHANGELOG.md
 SECURITY.md
 CODE_OF_CONDUCT.md
+ROADMAP.md
 .editorconfig
 .gitattributes
 node_modules/
