@@ -1,21 +1,9 @@
-# Auto detect text files and perform LF normalization
-* text=auto eol=lf
-
-# TypeScript
+﻿* text=auto eol=lf
 *.ts text eol=lf
-*.tsx text eol=lf
-
-# JSON
 *.json text eol=lf
-
-# Markdown
 *.md text eol=lf
-
-# Shell scripts
+*.yml text eol=lf
 *.sh text eol=lf
-
-# Binary files
 *.png binary
 *.jpg binary
-*.ico binary
 *.zip binary
