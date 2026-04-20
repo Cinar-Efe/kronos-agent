@@ -6,4 +6,10 @@ examples/
 tsconfig.json
 CONTRIBUTING.md
 CHANGELOG.md
+SECURITY.md
+CODE_OF_CONDUCT.md
+.editorconfig
+.gitattributes
 node_modules/
+*.test.ts
+*.spec.ts
