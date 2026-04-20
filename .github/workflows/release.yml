@@ -1,0 +1,33 @@
+name: Kronos Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  ship:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Kronos
+        run: npm install -g kronos-agent
+
+      - name: Ship Release Content
+        run: kronos ship --release ${{ github.event.release.tag_name }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Upload Release Content
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-content
+          path: releases/
