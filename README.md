@@ -7,6 +7,10 @@
 **An autonomous AI agent that transforms your software releases into ready-to-publish content for every major platform — in 7 languages.**
 
 [![npm version](https://img.shields.io/npm/v/kronos-agent?color=gold)](https://www.npmjs.com/package/kronos-agent)
+[![GitHub stars](https://img.shields.io/github/stars/Cinar-Efe/kronos-agent?style=social)](https://github.com/Cinar-Efe/kronos-agent/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Cinar-Efe/kronos-agent)](https://github.com/Cinar-Efe/kronos-agent/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Cinar-Efe/kronos-agent)](https://github.com/Cinar-Efe/kronos-agent/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Cinar-Efe/kronos-agent/pulls)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Languages](https://img.shields.io/badge/languages-7-blue)](#-supported-languages)
 [![Platforms](https://img.shields.io/badge/platforms-6-green)](#-content-platforms)
@@ -542,3 +546,4 @@ No. Only your commit messages are sent — never your source code.
 
 **Q: Can I generate content for specific platforms only?**  
 Yes: `kronos ship --release v1.0.0 --platforms twitter,linkedin`
+
