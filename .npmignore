@@ -1,0 +1,9 @@
+src/
+tests/
+examples/
+.github/
+.env.example
+tsconfig.json
+CONTRIBUTING.md
+CHANGELOG.md
+node_modules/
