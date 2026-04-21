@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kronos — Titan of your timeline</title>
+<meta name="description" content="Autonomous AI agent that transforms your releases into ready-to-publish content for every platform. 7 languages. 6 platforms. One command.">
+<meta property="og:title" content="Kronos — Titan of your timeline">
+<meta property="og:description" content="Autonomous AI agent that transforms your releases into content for every platform.">
+<meta property="og:image" content="./kronos-banner.png">
+<meta property="og:type" content="website">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0d14;
+  --bg-2: #0d1117;
+  --bg-3: #161b22;
+  --bg-4: #1c2128;
+  --gold: #ffd60a;
+  --gold-dark: #c9a507;
+  --gold-light: #ffea5c;
+  --beige: #d4a574;
+  --beige-light: #e8c9a0;
+  --green: #7ce38b;
+  --blue: #58a6ff;
+  --text: #f0e9d2;
+  --text-2: #a8a29e;
+  --text-3: #57534e;
+  --border: #30363d;
+  --shadow: 0 0 80px rgba(255, 214, 10, 0.12);
+  --radius: 12px;
+  --radius-sm: 6px;
+  --transition: cubic-bezier(0.16, 1, 0.3, 1);
+  
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* Custom cursor glow effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 214, 10, 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 110%, rgba(230, 57, 70, 0.1), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle grain texture */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.003) 2px,
+      rgba(255, 255, 255, 0.003) 4px
+    );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 13, 20, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+  animation: navSlide 0.8s var(--transition) forwards;
+  transform: translateY(-100%);
+}
+
+@keyframes navSlide {
+  to { transform: translateY(0); }
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 4px;
+}
+
+.nav-logo-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  position: relative;
+  font-size: 16px;
+  color: var(--gold);
+}
+
+.nav-logo-icon::before {
+  content: '⌛';
+  position: absolute;
+  font-size: 16px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-cta:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255, 214, 10, 0.4);
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  padding: 180px 48px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Decorative corner ornaments */
+.corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--gold-dark);
+  opacity: 0.4;
+  animation: cornerFade 1.5s 0.8s var(--transition) backwards;
+}
+
+@keyframes cornerFade {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 0.4; transform: scale(1); }
+}
+
+.corner-tl { top: 100px; left: 40px; border-right: none; border-bottom: none; }
+.corner-tr { top: 100px; right: 40px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
+.corner-br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 214, 10, 0.3);
+  border-radius: 24px;
+  background: rgba(255, 214, 10, 0.05);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s 0.2s var(--transition) backwards;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero-logo {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 40px;
+  position: relative;
+  animation: logoFloat 0.8s 0.4s var(--transition) backwards, floating 4s ease-in-out infinite 1.2s;
+}
+
+@keyframes logoFloat {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-logo svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 30px rgba(255, 214, 10, 0.3));
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 10vw, 140px);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: 8px;
+  margin-bottom: 12px;
+  animation: titleReveal 1s 0.6s var(--transition) backwards;
+}
+
+@keyframes titleReveal {
+  from { opacity: 0; transform: translateY(40px); letter-spacing: 20px; }
+  to { opacity: 1; transform: translateY(0); letter-spacing: 8px; }
+}
+
+.hero-title .letter {
+  display: inline-block;
+  animation: letterDrop 0.6s var(--transition) backwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-style: italic;
+  color: var(--gold-dark);
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+  animation: fadeUp 0.8s 0.8s var(--transition) backwards;
+}
+
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+  margin: 32px auto;
+  animation: widthGrow 1s 1s var(--transition) backwards;
+}
+
+@keyframes widthGrow {
+  from { width: 0; opacity: 0; }
+  to { width: 120px; opacity: 1; }
+}
+
+.hero-description {
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-bottom: 48px;
+  animation: fadeUp 0.8s 1.1s var(--transition) backwards;
+}
+
+.hero-description strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 64px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.8s 1.3s var(--transition) backwards;
+}
+
+.btn {
+  padding: 16px 32px;
+  border-radius: 32px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--bg);
+  box-shadow: 0 4px 24px rgba(255, 214, 10, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 214, 10, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(255, 214, 10, 0.05);
+}
+
+/* Terminal */
+.terminal {
+  max-width: 640px;
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 214, 10, 0.1);
+  animation: fadeUp 0.8s 1.5s var(--transition) backwards;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.terminal-body {
+  padding: 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+  min-height: 240px;
+}
+
+.terminal-line {
+  opacity: 0;
+  animation: typeLine 0.6s var(--transition) forwards;
+}
+
+.terminal-line:nth-child(1) { animation-delay: 2s; }
+.terminal-line:nth-child(2) { animation-delay: 2.8s; }
+.terminal-line:nth-child(3) { animation-delay: 3.4s; }
+.terminal-line:nth-child(4) { animation-delay: 4s; }
+.terminal-line:nth-child(5) { animation-delay: 4.6s; }
+.terminal-line:nth-child(6) { animation-delay: 5.2s; }
+
+@keyframes typeLine {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.terminal-prompt { color: var(--green); }
+.terminal-cmd { color: var(--text); }
+.terminal-comment { color: var(--text-3); font-style: italic; }
+.terminal-success { color: var(--green); }
+.terminal-highlight { color: var(--gold); }
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--gold);
+  vertical-align: text-bottom;
+  animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ============ SECTIONS ============ */
+section {
+  position: relative;
+  z-index: 2;
+  padding: 120px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s var(--transition);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s 0.1s var(--transition);
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.section-description {
+  font-size: 18px;
+  color: var(--text-2);
+  max-width: 640px;
+  line-height: 1.7;
+  margin-bottom: 64px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s 0.2s var(--transition);
+}
+
+.in-view .section-label,
+.in-view .section-title,
+.in-view .section-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ FEATURES ============ */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--transition);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.in-view .feature-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.in-view .feature-card:nth-child(1) { transition-delay: 0.1s; }
+.in-view .feature-card:nth-child(2) { transition-delay: 0.2s; }
+.in-view .feature-card:nth-child(3) { transition-delay: 0.3s; }
+.in-view .feature-card:nth-child(4) { transition-delay: 0.4s; }
+.in-view .feature-card:nth-child(5) { transition-delay: 0.5s; }
+.in-view .feature-card:nth-child(6) { transition-delay: 0.6s; }
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-dark);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 214, 10, 0.08);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--gold-dark);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: rgba(255, 214, 10, 0.05);
+  transition: all 0.3s;
+}
+
+.feature-card:hover .feature-icon {
+  border-color: var(--gold);
+  background: rgba(255, 214, 10, 0.1);
+  transform: rotate(5deg);
+}
+
+.feature-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.feature-number {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-3);
+  letter-spacing: 2px;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  letter-spacing: 0;
+}
+
+.feature-description {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* ============ PLATFORMS ============ */
+.platforms-section {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 100px 48px;
+  margin: 80px 0;
+}
+
+.platforms-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.platform-pill {
+  padding: 20px 24px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.in-view .platform-pill {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.in-view .platform-pill:nth-child(1) { transition-delay: 0.05s; }
+.in-view .platform-pill:nth-child(2) { transition-delay: 0.1s; }
+.in-view .platform-pill:nth-child(3) { transition-delay: 0.15s; }
+.in-view .platform-pill:nth-child(4) { transition-delay: 0.2s; }
+.in-view .platform-pill:nth-child(5) { transition-delay: 0.25s; }
+.in-view .platform-pill:nth-child(6) { transition-delay: 0.3s; }
+
+.platform-pill:hover {
+  border-color: var(--gold);
+  background: var(--bg-4);
+  transform: translateX(4px);
+}
+
+.platform-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.platform-info strong {
+  display: block;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.platform-info span {
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+/* ============ LANGUAGES ============ */
+.languages-marquee {
+  overflow: hidden;
+  padding: 32px 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 40px 0;
+  position: relative;
+}
+
+.languages-marquee::before,
+.languages-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.languages-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-2), transparent);
+}
+
+.languages-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-2), transparent);
+}
+
+.languages-track {
+  display: flex;
+  gap: 60px;
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.language-item .flag {
+  font-size: 36px;
+}
+
+.language-item .code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+/* ============ DEMO ============ */
+.demo-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.demo-terminal {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s var(--transition);
+}
+
+.in-view .demo-terminal {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.demo-outputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-output {
+  padding: 16px 20px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.5s var(--transition);
+}
+
+.in-view .demo-output {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.in-view .demo-output:nth-child(1) { transition-delay: 0.2s; }
+.in-view .demo-output:nth-child(2) { transition-delay: 0.3s; }
+.in-view .demo-output:nth-child(3) { transition-delay: 0.4s; }
+.in-view .demo-output:nth-child(4) { transition-delay: 0.5s; }
+.in-view .demo-output:nth-child(5) { transition-delay: 0.6s; }
+.in-view .demo-output:nth-child(6) { transition-delay: 0.7s; }
+
+.demo-output:hover {
+  border-color: var(--gold-dark);
+  background: var(--bg-4);
+}
+
+.demo-output-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(124, 227, 139, 0.15);
+  border: 1px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--green);
+  font-size: 12px;
+}
+
+.demo-output-info {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.demo-output-info strong {
+  color: var(--text);
+  display: block;
+  font-weight: 700;
+}
+
+.demo-output-info span {
+  color: var(--text-2);
+  font-size: 11px;
+}
+
+.demo-output-size {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+}
+
+/* ============ INSTALL ============ */
+.install-blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.install-block {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.in-view .install-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.in-view .install-block:nth-child(1) { transition-delay: 0.1s; }
+.in-view .install-block:nth-child(2) { transition-delay: 0.2s; }
+.in-view .install-block:nth-child(3) { transition-delay: 0.3s; }
+
+.install-block:hover {
+  border-color: var(--gold-dark);
+}
+
+.install-step {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.install-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.install-code {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--green);
+  overflow-x: auto;
+  margin-top: 8px;
+  position: relative;
+}
+
+.install-code::before {
+  content: '$';
+  color: var(--text-3);
+  margin-right: 8px;
+}
+
+/* ============ FAQ ============ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 840px;
+}
+
+.faq-item {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.in-view .faq-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.in-view .faq-item:nth-child(1) { transition-delay: 0.05s; }
+.in-view .faq-item:nth-child(2) { transition-delay: 0.1s; }
+.in-view .faq-item:nth-child(3) { transition-delay: 0.15s; }
+.in-view .faq-item:nth-child(4) { transition-delay: 0.2s; }
+.in-view .faq-item:nth-child(5) { transition-delay: 0.25s; }
+.in-view .faq-item:nth-child(6) { transition-delay: 0.3s; }
+
+.faq-item:hover {
+  border-color: var(--gold-dark);
+}
+
+.faq-question {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text);
+  user-select: none;
+  transition: color 0.3s;
+}
+
+.faq-question:hover {
+  color: var(--gold);
+}
+
+.faq-icon {
+  color: var(--gold);
+  font-size: 24px;
+  transition: transform 0.3s;
+  font-family: var(--font-mono);
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--transition);
+}
+
+.faq-item.open .faq-answer {
+  max-height: 300px;
+}
+
+.faq-answer-inner {
+  padding: 0 24px 20px;
+  color: var(--text-2);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.faq-answer-inner code {
+  background: var(--bg-4);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold);
+}
+
+/* ============ CTA ============ */
+.cta-section {
+  padding: 120px 48px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.cta-card {
+  background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 80px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255, 214, 10, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-ornament {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: var(--gold-dark);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-ornament::before,
+.cta-ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--gold-dark);
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 64px);
+  color: var(--gold);
+  margin-bottom: 16px;
+  font-weight: 500;
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title em {
+  font-style: italic;
+}
+
+.cta-description {
+  font-size: 18px;
+  color: var(--text-2);
+  margin-bottom: 40px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 48px 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--gold);
+  letter-spacing: 4px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+.footer-copy {
+  text-align: center;
+  color: var(--text-3);
+  font-size: 13px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 140px 24px 60px; }
+  section { padding: 80px 24px; }
+  .platforms-section { padding: 60px 24px; }
+  .cta-section { padding: 80px 24px; }
+  .footer { padding: 40px 24px 24px; }
+  .corner { display: none; }
+  .demo-layout { grid-template-columns: 1fr; gap: 32px; }
+  .install-blocks { grid-template-columns: 1fr; }
+  .cta-card { padding: 48px 24px; }
+  .cta-ornament::before,
+  .cta-ornament::after { width: 30px; }
+  .footer-content { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon"></div>
+    KRONOS
+  </div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#platforms">Platforms</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://github.com/Cinar-Efe/kronos-agent" class="nav-cta" target="_blank">
+    ⭐ Star on GitHub
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    v0.1.0 · Open Source · AI Agent
+  </div>
+
+  <div class="hero-logo">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="92" fill="#161b22" stroke="#ffd60a" stroke-width="3"/>
+      <g transform="translate(100, 100)">
+        <!-- Top cap -->
+        <rect x="-40" y="-58" width="80" height="6" rx="1" fill="#ffd60a"/>
+        <!-- Bottom cap -->
+        <rect x="-40" y="52" width="80" height="6" rx="1" fill="#ffd60a"/>
+        <!-- Top bulb outline -->
+        <path d="M -32 -52 L 32 -52 L 5 -3 L -5 -3 Z" fill="none" stroke="#ffd60a" stroke-width="2"/>
+        <!-- Top bulb sand -->
+        <path d="M -26 -43 L 26 -43 L 3 -6 L -3 -6 Z" fill="#c9a507"/>
+        <!-- Bottom bulb outline -->
+        <path d="M -32 52 L 32 52 L 5 3 L -5 3 Z" fill="none" stroke="#ffd60a" stroke-width="2"/>
+        <!-- Bottom bulb sand (collecting) -->
+        <path d="M -28 52 L 28 52 L 12 32 L -12 32 Z" fill="#c9a507"/>
+        <!-- Falling sand stream -->
+        <rect x="-1.5" y="-3" width="3" height="35" fill="#ffd60a"/>
+        <!-- Red accent dot -->
+        <circle cx="0" cy="-23" r="2.5" fill="#e63946"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1 class="hero-title">KRONOS</h1>
+  <div class="hero-subtitle">— Titan of your timeline —</div>
+  <div class="hero-divider"></div>
+
+  <p class="hero-description">
+    An <strong>autonomous AI agent</strong> that transforms your software releases into ready-to-publish content for every major platform.
+    <br><br>
+    <strong>One command.</strong> Six platforms. Seven languages. Thirty seconds.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#install" class="btn btn-primary">
+      ⚡ Get Started
+    </a>
+    <a href="https://github.com/Cinar-Efe/kronos-agent" target="_blank" class="btn btn-secondary">
+      View on GitHub →
+    </a>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+      </div>
+      <div class="terminal-title">~/your-project</div>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos generate --release v0.1.0 --language en-US</span>
+      </div>
+      <div class="terminal-line">
+        <span class="terminal-comment"># analyzing commits...</span>
+      </div>
+      <div class="terminal-line">
+        <span class="terminal-success">✓</span> <span class="terminal-cmd">Found 12 commits</span>
+      </div>
+      <div class="terminal-line">
+        <span class="terminal-success">✓</span> <span class="terminal-cmd">Generating content for 6 platforms...</span>
+      </div>
+      <div class="terminal-line">
+        <span class="terminal-success">✓</span> <span class="terminal-cmd">Done in <span class="terminal-highlight">28.3s</span></span>
+      </div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span> <span class="terminal-cursor"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">— 01 · Why Kronos —</div>
+  <h2 class="section-title">Built for <em>developers</em><br>who ship fast</h2>
+  <p class="section-description">
+    Every release deserves a proper announcement. But writing content for every platform takes hours.
+    Kronos does it autonomously, in seconds, in your voice.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-number">01</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">Autonomous Agent</h3>
+      <p class="feature-description">
+        Analyzes your git history, understands conventional commits, and generates content without supervision.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-number">02</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">Seven Languages</h3>
+      <p class="feature-description">
+        English (US/UK), French, Chinese, Russian, German, Spanish. Native-quality output, not robotic translations.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-number">03</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">Parallel Generation</h3>
+      <p class="feature-description">
+        All platforms generated simultaneously. Six API calls in parallel — six times faster than sequential.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-number">04</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">Tone Control</h3>
+      <p class="feature-description">
+        Professional, casual, excited, or technical. Match the voice of your project and audience perfectly.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-number">05</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="9" y1="3" x2="9" y2="21"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">Smart Parsing</h3>
+      <p class="feature-description">
+        Understands conventional commits — feat, fix, breaking. Groups changes intelligently by impact.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-number">06</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">Fraction of a Cent</h3>
+      <p class="feature-description">
+        Powered by GPT-4o-mini. Each release costs about $0.004. A $5 budget lasts for 1,250 releases.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES MARQUEE -->
+<div class="languages-marquee">
+  <div class="languages-track">
+    <div class="language-item"><span class="flag">🇺🇸</span> English <span class="code">EN-US</span></div>
+    <div class="language-item"><span class="flag">🇬🇧</span> English <span class="code">EN-GB</span></div>
+    <div class="language-item"><span class="flag">🇫🇷</span> Français <span class="code">FR</span></div>
+    <div class="language-item"><span class="flag">🇨🇳</span> 中文 <span class="code">ZH</span></div>
+    <div class="language-item"><span class="flag">🇷🇺</span> Русский <span class="code">RU</span></div>
+    <div class="language-item"><span class="flag">🇩🇪</span> Deutsch <span class="code">DE</span></div>
+    <div class="language-item"><span class="flag">🇪🇸</span> Español <span class="code">ES</span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="language-item"><span class="flag">🇺🇸</span> English <span class="code">EN-US</span></div>
+    <div class="language-item"><span class="flag">🇬🇧</span> English <span class="code">EN-GB</span></div>
+    <div class="language-item"><span class="flag">🇫🇷</span> Français <span class="code">FR</span></div>
+    <div class="language-item"><span class="flag">🇨🇳</span> 中文 <span class="code">ZH</span></div>
+    <div class="language-item"><span class="flag">🇷🇺</span> Русский <span class="code">RU</span></div>
+    <div class="language-item"><span class="flag">🇩🇪</span> Deutsch <span class="code">DE</span></div>
+    <div class="language-item"><span class="flag">🇪🇸</span> Español <span class="code">ES</span></div>
+  </div>
+</div>
+
+<!-- PLATFORMS -->
+<section id="platforms" class="platforms-section">
+  <div class="platforms-wrapper">
+    <div class="section-label">— 02 · Every platform —</div>
+    <h2 class="section-title">One command, <em>six channels</em></h2>
+    <p class="section-description">
+      From technical changelogs to viral tweets, from launch posts to newsletters — 
+      Kronos writes content tailored to each platform's native style.
+    </p>
+
+    <div class="platforms-grid">
+      <div class="platform-pill">
+        <div class="platform-icon">📝</div>
+        <div class="platform-info">
+          <strong>Changelog</strong>
+          <span>Keep-a-Changelog format</span>
+        </div>
+      </div>
+      <div class="platform-pill">
+        <div class="platform-icon">🐦</div>
+        <div class="platform-info">
+          <strong>Twitter / X</strong>
+          <span>5–7 tweet thread</span>
+        </div>
+      </div>
+      <div class="platform-pill">
+        <div class="platform-icon">💼</div>
+        <div class="platform-info">
+          <strong>LinkedIn</strong>
+          <span>Professional post</span>
+        </div>
+      </div>
+      <div class="platform-pill">
+        <div class="platform-icon">🚀</div>
+        <div class="platform-info">
+          <strong>Product Hunt</strong>
+          <span>Launch-ready copy</span>
+        </div>
+      </div>
+      <div class="platform-pill">
+        <div class="platform-icon">🎥</div>
+        <div class="platform-info">
+          <strong>YouTube</strong>
+          <span>Full video script</span>
+        </div>
+      </div>
+      <div class="platform-pill">
+        <div class="platform-icon">📧</div>
+        <div class="platform-info">
+          <strong>Email</strong>
+          <span>Newsletter ready</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section>
+  <div class="section-label">— 03 · In Action —</div>
+  <h2 class="section-title">From <em>commit</em> to content<br>in seconds</h2>
+  <p class="section-description">
+    Run the command. Kronos analyzes your git history, orchestrates parallel AI calls, and writes platform-specific content while you watch.
+  </p>
+
+  <div class="demo-layout">
+    <div class="demo-terminal">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+        </div>
+        <div class="terminal-title">kronos · output</div>
+      </div>
+      <div class="terminal-body">
+        <div><span class="terminal-prompt">$</span> <span class="terminal-cmd">kronos generate --release v0.1.0</span></div>
+        <div>&nbsp;</div>
+        <div><span class="terminal-comment">[ analyzing git history ]</span></div>
+        <div><span class="terminal-success">✓</span> 47 commits parsed</div>
+        <div><span class="terminal-success">✓</span> 12 contributors detected</div>
+        <div><span class="terminal-success">✓</span> 3 breaking changes flagged</div>
+        <div>&nbsp;</div>
+        <div><span class="terminal-comment">[ orchestrating parallel calls ]</span></div>
+        <div><span class="terminal-success">⚡</span> <span class="terminal-highlight">changelog.md</span> ← generated</div>
+        <div><span class="terminal-success">⚡</span> <span class="terminal-highlight">twitter.md</span> ← generated</div>
+        <div><span class="terminal-success">⚡</span> <span class="terminal-highlight">linkedin.md</span> ← generated</div>
+        <div><span class="terminal-success">⚡</span> <span class="terminal-highlight">producthunt.md</span> ← generated</div>
+        <div><span class="terminal-success">⚡</span> <span class="terminal-highlight">youtube.md</span> ← generated</div>
+        <div><span class="terminal-success">⚡</span> <span class="terminal-highlight">email.md</span> ← generated</div>
+        <div>&nbsp;</div>
+        <div><span class="terminal-success">✨</span> Done in <span class="terminal-highlight">28.3s</span></div>
+      </div>
+    </div>
+
+    <div class="demo-outputs">
+      <div class="demo-output">
+        <div class="demo-output-check">✓</div>
+        <div class="demo-output-info">
+          <strong>CHANGELOG.md</strong>
+          <span>Technical, grouped by impact</span>
+        </div>
+        <div class="demo-output-size">2.4 KB</div>
+      </div>
+      <div class="demo-output">
+        <div class="demo-output-check">✓</div>
+        <div class="demo-output-info">
+          <strong>twitter-thread.md</strong>
+          <span>7 tweets · ready to post</span>
+        </div>
+        <div class="demo-output-size">1.1 KB</div>
+      </div>
+      <div class="demo-output">
+        <div class="demo-output-check">✓</div>
+        <div class="demo-output-info">
+          <strong>linkedin-post.md</strong>
+          <span>Professional, 1,280 chars</span>
+        </div>
+        <div class="demo-output-size">1.3 KB</div>
+      </div>
+      <div class="demo-output">
+        <div class="demo-output-check">✓</div>
+        <div class="demo-output-info">
+          <strong>producthunt.md</strong>
+          <span>Tagline, description, comment</span>
+        </div>
+        <div class="demo-output-size">880 B</div>
+      </div>
+      <div class="demo-output">
+        <div class="demo-output-check">✓</div>
+        <div class="demo-output-info">
+          <strong>youtube-script.md</strong>
+          <span>Hook, sections, timestamps</span>
+        </div>
+        <div class="demo-output-size">2.7 KB</div>
+      </div>
+      <div class="demo-output">
+        <div class="demo-output-check">✓</div>
+        <div class="demo-output-info">
+          <strong>email-newsletter.md</strong>
+          <span>Subject, preview, CTA</span>
+        </div>
+        <div class="demo-output-size">1.5 KB</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section id="install">
+  <div class="section-label">— 04 · Get Started —</div>
+  <h2 class="section-title">Installed in <em>three steps</em></h2>
+  <p class="section-description">
+    Node.js 18+ is required. Need an OpenAI API key (gpt-4o-mini costs about $0.004 per release).
+  </p>
+
+  <div class="install-blocks">
+    <div class="install-block">
+      <div class="install-step">STEP 01</div>
+      <h3 class="install-title">Install globally</h3>
+      <p style="color: var(--text-2); font-size: 14px; margin-bottom: 8px;">
+        Via npm, yarn, or pnpm.
+      </p>
+      <div class="install-code">npm install -g kronos-agent</div>
+    </div>
+
+    <div class="install-block">
+      <div class="install-step">STEP 02</div>
+      <h3 class="install-title">Configure once</h3>
+      <p style="color: var(--text-2); font-size: 14px; margin-bottom: 8px;">
+        API key, language, platforms, tone.
+      </p>
+      <div class="install-code">kronos config</div>
+    </div>
+
+    <div class="install-block">
+      <div class="install-step">STEP 03</div>
+      <h3 class="install-title">Ship anything</h3>
+      <p style="color: var(--text-2); font-size: 14px; margin-bottom: 8px;">
+        Done. Watch the magic.
+      </p>
+      <div class="install-code">kronos generate --release v1.0.0</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">— 05 · FAQ —</div>
+  <h2 class="section-title">Questions, <em>answered</em></h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How much does Kronos cost?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Kronos itself is <strong>free and open-source</strong>. You only pay for OpenAI API usage (<code>gpt-4o-mini</code>). A typical release costs around <code>$0.004</code>. A $5 budget lasts for roughly 1,250 releases.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Do I need conventional commits?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Not required, but highly recommended. Kronos works with any commit messages but produces better output with conventional commits like <code>feat:</code>, <code>fix:</code>, and <code>BREAKING CHANGE:</code>.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Which languages are supported?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Seven languages: English (US & UK), French, Chinese, Russian, German, and Spanish. Content is written natively in each language — not machine-translated. More languages are on the roadmap.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I use Kronos in my CI/CD pipeline?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Absolutely. Set the <code>OPENAI_API_KEY</code> environment variable and run <code>kronos generate --release $VERSION</code>. GitHub Actions example is in the README.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I customize the output?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes — pick your tone (professional, casual, excited, technical), choose which platforms to generate for, and set your default language. Custom templates are on the roadmap.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Is my code sent to OpenAI?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Only your commit <strong>messages</strong> are sent — never your source code. Kronos parses <code>git log</code> metadata (commit messages, authors, timestamps) and nothing else.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-card">
+    <div class="cta-ornament">⚜ Ready to ship ⚜</div>
+    <h2 class="cta-title">Let the <em>messenger</em> deliver</h2>
+    <p class="cta-description">
+      Stop writing release content by hand. Install Kronos and send your next release into the world — in every language, on every platform.
+    </p>
+    <div class="cta-actions">
+      <a href="#install" class="btn btn-primary">⚡ Install Kronos</a>
+      <a href="https://github.com/Cinar-Efe/kronos-agent" target="_blank" class="btn btn-secondary">⭐ Star on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="nav-logo-icon"></div>
+      KRONOS
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://github.com/Cinar-Efe/kronos-agent" target="_blank">GitHub</a></li>
+      <li><a href="https://github.com/Cinar-Efe/kronos-agent/blob/main/README.md" target="_blank">Docs</a></li>
+      <li><a href="https://github.com/Cinar-Efe/kronos-agent/issues" target="_blank">Issues</a></li>
+      <li><a href="https://github.com/Cinar-Efe/kronos-agent/releases" target="_blank">Releases</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">
+    The titan of time · now the shipper of your code · MIT License · Built with ⌛ by <a href="https://github.com/Cinar-Efe" target="_blank" style="color: var(--gold-dark);">Cinar-Efe</a>
+  </div>
+</footer>
+
+<script>
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -80px 0px'
+});
+
+document.querySelectorAll('section, .platforms-section').forEach(el => {
+  observer.observe(el);
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  const question = item.querySelector('.faq-question');
+  question.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Letter animation for hero title
+const heroTitle = document.querySelector('.hero-title');
+if (heroTitle) {
+  const text = heroTitle.textContent;
+  heroTitle.textContent = '';
+  text.split('').forEach((char, i) => {
+    const span = document.createElement('span');
+    span.className = 'letter';
+    span.textContent = char;
+    span.style.animationDelay = `${0.6 + i * 0.05}s`;
+    heroTitle.appendChild(span);
+  });
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
