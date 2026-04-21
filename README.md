@@ -2,7 +2,7 @@
 
 # ⌛ KRONOS
 
-### Time to ship
+### Titan of your timeline
 
 **An autonomous AI agent that transforms your software releases into ready-to-publish content for every major platform — in 7 languages.**
 
@@ -17,7 +17,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 
 ```bash
-kronos ship --release v1.0.0
+kronos generate --release v1.0.0
 ```
 
 *One command. Six platforms. Seven languages. Zero effort.*
@@ -208,7 +208,7 @@ cd path/to/your/project
 ### Step 3: Ship Your Release
 
 ```bash
-kronos ship --release v1.0.0
+kronos generate --release v1.0.0
 ```
 
 That's it. Kronos will:
@@ -222,41 +222,41 @@ That's it. Kronos will:
 
 ### Interactive mode (prompts for version)
 ```bash
-kronos ship
+kronos generate
 ```
 
 ### Specific version
 ```bash
-kronos ship --release v2.0.0
+kronos generate --release v2.0.0
 ```
 
 ### Different language
 ```bash
-kronos ship --release v2.0.0 --language fr
-kronos ship --release v2.0.0 --language zh
-kronos ship --release v2.0.0 --language de
+kronos generate --release v2.0.0 --language fr
+kronos generate --release v2.0.0 --language zh
+kronos generate --release v2.0.0 --language de
 ```
 
 ### Only specific platforms
 ```bash
-kronos ship --release v2.0.0 --platforms twitter,linkedin
-kronos ship --release v2.0.0 --platforms changelog
+kronos generate --release v2.0.0 --platforms twitter,linkedin
+kronos generate --release v2.0.0 --platforms changelog
 ```
 
 ### Different tone
 ```bash
-kronos ship --release v2.0.0 --tone excited
-kronos ship --release v2.0.0 --tone technical
+kronos generate --release v2.0.0 --tone excited
+kronos generate --release v2.0.0 --tone technical
 ```
 
 ### Custom output directory
 ```bash
-kronos ship --release v2.0.0 --output ./marketing/releases
+kronos generate --release v2.0.0 --output ./marketing/releases
 ```
 
 ### Combine options
 ```bash
-kronos ship --release v2.0.0 --language es --tone casual --platforms twitter,linkedin
+kronos generate --release v2.0.0 --language es --tone casual --platforms twitter,linkedin
 ```
 
 ---
@@ -264,7 +264,7 @@ kronos ship --release v2.0.0 --language es --tone casual --platforms twitter,lin
 ## 📘 All Commands
 
 ```bash
-kronos ship       # Generate release content (main command)
+kronos generate       # Generate release content (main command)
 kronos config     # Configure settings (interactive wizard)
 kronos languages  # List supported languages
 kronos init       # First-time setup
@@ -350,15 +350,15 @@ You can override config with environment variables:
 ```bash
 # Linux/macOS
 export OPENAI_API_KEY="sk-proj-..."
-kronos ship --release v1.0.0
+kronos generate --release v1.0.0
 
 # Windows PowerShell
 $env:OPENAI_API_KEY = "sk-proj-..."
-kronos ship --release v1.0.0
+kronos generate --release v1.0.0
 
 # Windows CMD
 set OPENAI_API_KEY=sk-proj-...
-kronos ship --release v1.0.0
+kronos generate --release v1.0.0
 ```
 
 This is useful for CI/CD pipelines.
@@ -420,7 +420,7 @@ jobs:
       - name: Generate release content
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: kronos ship --release ${{ github.ref_name }} --language en-US
+        run: kronos generate --release ${{ github.ref_name }} --language en-US
 
       - name: Commit generated content
         run: |
@@ -523,7 +523,7 @@ If Kronos saved you time, consider:
 
 ⭐ Starring the repo &nbsp;•&nbsp; 🐦 Sharing on Twitter &nbsp;•&nbsp; 💖 Telling a friend
 
-*The messenger of the gods is now the time to ship.*
+*The messenger of the gods is now the Titan of your timeline.*
 
 </div>
 
@@ -539,11 +539,12 @@ Not required, but recommended. Kronos works with any commit messages.
 Node.js 18 or higher.
 
 **Q: Can I use Kronos in CI/CD pipelines?**  
-Yes! Set `OPENAI_API_KEY` as an environment variable and run `kronos ship --release $VERSION`.
+Yes! Set `OPENAI_API_KEY` as an environment variable and run `kronos generate --release $VERSION`.
 
 **Q: Is my source code sent to OpenAI?**  
 No. Only your commit messages are sent — never your source code.
 
 **Q: Can I generate content for specific platforms only?**  
-Yes: `kronos ship --release v1.0.0 --platforms twitter,linkedin`
+Yes: `kronos generate --release v1.0.0 --platforms twitter,linkedin`
+
 

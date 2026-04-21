@@ -35,7 +35,7 @@ program
  * SHIP command - Main command to generate release content
  */
 program
-  .command('ship')
+  .command('generate')
   .description('Generate release content for all platforms')
   .option('-r, --release <version>', 'Release version (e.g., v1.2.0)')
   .option('-l, --language <lang>', 'Output language (en-US, en-GB, fr, zh, ru, de, es)')
@@ -220,3 +220,4 @@ program
   });
 
 program.parse();
+
