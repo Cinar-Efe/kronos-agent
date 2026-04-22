@@ -23,7 +23,7 @@ const LOGO = chalk.yellow(`
     ╦╔═╦═╗╔═╗╔╗╔╔═╗╔═╗
     ╠╩╗╠╦╝║ ║║║║║ ║╚═╗
     ╩ ╩╩╚═╚═╝╝╚╝╚═╝╚═╝
-  ${chalk.cyan('⌛ Time to ship')}
+  ${chalk.cyan('⌛ Time to generate')}
 `);
 
 program
@@ -32,14 +32,16 @@ program
   .version('0.1.0');
 
 /**
- * SHIP command - Main command to generate release content
+ * generate command - Main command to generate release content
  */
 program
   .command('generate')
   .description('Generate release content for all platforms')
   .option('-r, --release <version>', 'Release version (e.g., v1.2.0)')
   .option('-l, --language <lang>', 'Output language (en-US, en-GB, fr, zh, ru, de, es)')
-  .option('-p, --platforms <platforms>', 'Platforms (comma-separated)')
+  .option('-p, --platforms <platforms>', 
+  'Platforms (twitter,linkedin,youtube,email,reddit,whatsapp,telegram,tiktok,twitch,instagram,discord)', 
+  'twitter,linkedin,youtube,email,reddit,whatsapp,telegram,tiktok,twitch,instagram,discord')
   .option('-t, --tone <tone>', 'Tone: professional, casual, excited, technical')
   .option('-o, --output <dir>', 'Output directory', './releases')
   .action(async (options) => {

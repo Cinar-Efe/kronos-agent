@@ -4,7 +4,7 @@
 
 ### Titan of your timeline
 
-**An autonomous AI agent that transforms your software releases into ready-to-publish content for every major platform — in 7 languages.**
+**An autonomous AI agent that transforms your software releases into viral-optimized content for 12 major platforms — in 7 languages.**
 
 [![npm version](https://img.shields.io/npm/v/kronos-agent?color=gold)](https://www.npmjs.com/package/kronos-agent)
 [![GitHub stars](https://img.shields.io/github/stars/Cinar-Efe/kronos-agent?style=social)](https://github.com/Cinar-Efe/kronos-agent/stargazers)
@@ -13,21 +13,21 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Cinar-Efe/kronos-agent/pulls)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Languages](https://img.shields.io/badge/languages-7-blue)](#-supported-languages)
-[![Platforms](https://img.shields.io/badge/platforms-6-green)](#-content-platforms)
+[![Platforms](https://img.shields.io/badge/platforms-12-green)](#-content-platforms)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 
 ```bash
 kronos generate --release v1.0.0
 ```
 
-*One command. Six platforms. Seven languages. Zero effort.*
+*One command. Twelve platforms. Seven languages. Zero effort.*
 
 </div>
 
 ---
 
 > [!WARNING]
-> **🚧 Beta Status - v0.1.0**
+> **🚧 Beta Status - v0.2.0**
 >
 > Kronos is in early development. Core functionality works, but expect rough edges.
 > Parts of this project were built with AI assistance. PRs, feedback, and 
@@ -40,20 +40,24 @@ kronos generate --release v1.0.0
 **Kronos is an autonomous AI agent for developers.**
 
 You write code and ship releases. Kronos handles everything *after* the release:
-writing changelogs, composing social media posts, drafting newsletters, scripting
-videos, and preparing launch content — all generated from your actual git commits,
-in the language and tone you choose.
+crafting viral social media posts, writing community announcements, creating video scripts,
+preparing messaging content, and generating launch materials — all from your actual git commits,
+optimized for each platform's unique format and audience.
 
 ### The Problem It Solves
 
 Every developer knows the pain after shipping:
 
-- ✍️ Writing a meaningful **CHANGELOG.md**
 - 🐦 Crafting an engaging **Twitter thread**
 - 💼 Composing a professional **LinkedIn post**
-- 🚀 Preparing **Product Hunt launch** copy
-- 🎥 Scripting a **YouTube video**
+- 🎥 Scripting a **YouTube video** with timestamps
 - 📧 Writing an **email newsletter**
+- 🔴 Creating a **Reddit post** with proper formatting
+- 💬 Writing **WhatsApp/Telegram** announcements
+- 🎵 Developing **TikTok video scripts**
+- 🎮 Preparing **Twitch stream** announcements
+- 📸 Designing **Instagram** carousel content
+- 🎮 Writing **Discord** server announcements
 
 This takes **hours** every release. Most developers skip it entirely, missing out
 on the audience and growth their hard work deserves.
@@ -66,11 +70,11 @@ on the audience and growth their hard work deserves.
 
 | Without Kronos | With Kronos |
 |----------------|-------------|
-| 🕐 3+ hours writing release content | ⚡ 30 seconds |
-| 😩 Generic marketing templates | 🎨 Context-aware from your commits |
+| 🕐 5+ hours writing platform-specific content | ⚡ 30 seconds |
+| 😩 Generic marketing templates | 🎨 Viral-optimized for each platform |
 | 🤖 Sounds like AI slop | 💬 Authentic, tone-adjusted voice |
 | 🇺🇸 English only | 🌍 7 languages |
-| 📝 Manual work for every platform | 🚀 All platforms in parallel |
+| 📝 Manual work for every platform | 🚀 12 platforms in parallel |
 | 💸 Pay a social media manager | 💰 ~$0.004 per release |
 
 ---
@@ -93,14 +97,32 @@ Kronos writes content natively in 7 languages — no robotic translations.
 
 ## 📱 Content Platforms
 
+Kronos generates viral-optimized content for **12 platforms**:
+
+### Social Media
 | Platform | What You Get |
 |----------|--------------|
-| 📝 **Changelog** | Keep-a-Changelog formatted `CHANGELOG.md` entry |
-| 🐦 **Twitter/X** | 5-7 tweet thread with hooks, emojis, hashtags |
-| 💼 **LinkedIn** | Professional 1000-1500 char post with hashtags |
-| 🚀 **Product Hunt** | Tagline + description + first comment |
-| 🎥 **YouTube** | Full video script with timestamps, tags, description |
-| 📧 **Email** | Subject line, preview, body, CTA text |
+| 🐦 **Twitter/X** | Engaging 5-7 tweet threads with hooks, emojis, hashtags |
+| 💼 **LinkedIn** | Professional 1000-1500 char posts with hashtag strategy |
+| 📸 **Instagram** | Carousel posts, Reels, Stories with captions & hashtags |
+| 🎵 **TikTok** | Complete video scripts (15-60s) with captions, hashtags, trending sound suggestions |
+
+### Content Platforms
+| Platform | What You Get |
+|----------|--------------|
+| 🎥 **YouTube** | Full video descriptions with timestamps, chapters, tags, SEO keywords |
+| 🎮 **Twitch** | Stream announcements with timestamps, viewer engagement hooks, chat prompts |
+| 🔴 **Reddit** | Community posts with TL;DR format, markdown, engagement questions |
+
+### Messaging & Community
+| Platform | What You Get |
+|----------|--------------|
+| 💬 **WhatsApp** | Emoji-rich mobile messages (1024 char limit), shareable format |
+| ✈️ **Telegram** | Channel-optimized markdown content (4096 chars), hashtag strategy |
+| 🎮 **Discord** | Server announcements with embeds, reaction suggestions, thread starters |
+| 📧 **Email** | Newsletter format with subject line, preview, body, CTA |
+
+Each platform follows viral optimization best practices specific to its audience and format.
 
 ---
 
@@ -239,8 +261,14 @@ kronos generate --release v2.0.0 --language de
 
 ### Only specific platforms
 ```bash
-kronos generate --release v2.0.0 --platforms twitter,linkedin
-kronos generate --release v2.0.0 --platforms changelog
+# Social media focused
+kronos generate --release v2.0.0 --platforms twitter,linkedin,instagram,tiktok
+
+# Messaging platforms
+kronos generate --release v2.0.0 --platforms whatsapp,telegram,discord
+
+# Content platforms
+kronos generate --release v2.0.0 --platforms youtube,twitch,reddit
 ```
 
 ### Different tone
@@ -256,7 +284,7 @@ kronos generate --release v2.0.0 --output ./marketing/releases
 
 ### Combine options
 ```bash
-kronos generate --release v2.0.0 --language es --tone casual --platforms twitter,linkedin
+kronos generate --release v2.0.0 --language es --tone casual --platforms twitter,instagram,tiktok
 ```
 
 ---
@@ -265,11 +293,11 @@ kronos generate --release v2.0.0 --language es --tone casual --platforms twitter
 
 ```bash
 kronos generate       # Generate release content (main command)
-kronos config     # Configure settings (interactive wizard)
-kronos languages  # List supported languages
-kronos init       # First-time setup
-kronos --help     # Show all commands and options
-kronos --version  # Show Kronos version
+kronos config         # Configure settings (interactive wizard)
+kronos languages      # List supported languages
+kronos init           # First-time setup
+kronos --help         # Show all commands and options
+kronos --version      # Show Kronos version
 ```
 
 ---
@@ -295,12 +323,34 @@ Kronos is an autonomous AI agent that orchestrates a 5-step workflow:
 1. 📊 ANALYZE    → Reads git log since last tag
 2. 🧠 UNDERSTAND → Parses conventional commits (feat, fix, breaking)
 3. 🎨 GENERATE   → Calls OpenAI GPT-4o-mini with platform-specific prompts
-4. ✨ POLISH     → Applies tone, language, and formatting rules
+4. ✨ POLISH     → Applies viral optimization, tone, language, formatting
 5. 💾 SAVE       → Organizes output in /releases/release-vX.X.X/
 ```
 
-The agent makes **6 parallel API calls** (one per platform), which is why it's 6x
-faster than sequential generation.
+The agent makes **12 parallel API calls** (one per platform), generating all content
+simultaneously for maximum speed.
+
+---
+
+## 📂 Output Structure
+
+Generated files are saved in the `releases/` directory:
+
+```
+releases/
+  └── release-v1.0.0/
+      ├── twitter-v1.0.0.txt
+      ├── linkedin-v1.0.0.txt
+      ├── youtube-v1.0.0.txt
+      ├── email-v1.0.0.html
+      ├── reddit-v1.0.0.md
+      ├── whatsapp-v1.0.0.txt
+      ├── telegram-v1.0.0.md
+      ├── tiktok-v1.0.0.md
+      ├── twitch-v1.0.0.md
+      ├── instagram-v1.0.0.md
+      └── discord-v1.0.0.md
+```
 
 ---
 
@@ -316,14 +366,14 @@ git commit -m "docs: update installation guide"
 ```
 
 **Commit types Kronos understands:**
-- `feat:` - New features (highlighted in Twitter/LinkedIn)
-- `fix:` - Bug fixes (grouped in changelog)
+- `feat:` - New features (highlighted across all platforms)
+- `fix:` - Bug fixes (grouped appropriately)
 - `feat!:` or `BREAKING CHANGE:` - Breaking changes (prominently featured)
-- `docs:` - Documentation
+- `docs:` - Documentation updates
 - `refactor:` - Code refactoring
 - `perf:` - Performance improvements
-- `test:` - Tests
-- `chore:` - Maintenance
+- `test:` - Test additions/changes
+- `chore:` - Maintenance tasks
 
 Kronos also handles regular commit messages — it just works better with conventional ones.
 
@@ -337,7 +387,19 @@ Kronos stores config in `~/.kronosrc`:
 {
   "openaiApiKey": "sk-proj-...",
   "language": "en-US",
-  "platforms": ["changelog", "twitter", "linkedin", "producthunt"],
+  "platforms": [
+    "twitter",
+    "linkedin",
+    "youtube",
+    "email",
+    "reddit",
+    "whatsapp",
+    "telegram",
+    "tiktok",
+    "twitch",
+    "instagram",
+    "discord"
+  ],
   "tone": "professional",
   "outputDir": "./releases"
 }
@@ -378,14 +440,15 @@ const data = await analyzer.getCommitsSinceLastRelease('v1.2.0');
 const agent = new KronosAgent({
   openaiApiKey: process.env.OPENAI_API_KEY!,
   language: 'fr',
-  platforms: ['twitter', 'linkedin'],
+  platforms: ['twitter', 'instagram', 'tiktok'],
   tone: 'excited',
   outputDir: './releases'
 });
 
 const content = await agent.generateAllContent(data);
 console.log(content.get('twitter'));
-console.log(content.get('linkedin'));
+console.log(content.get('instagram'));
+console.log(content.get('tiktok'));
 ```
 
 ---
@@ -420,7 +483,10 @@ jobs:
       - name: Generate release content
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: kronos generate --release ${{ github.ref_name }} --language en-US
+        run: |
+          kronos generate --release ${{ github.ref_name }} \
+            --language en-US \
+            --platforms twitter,linkedin,reddit,discord
 
       - name: Commit generated content
         run: |
@@ -477,19 +543,21 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ## 🛣️ Roadmap
 
 - [x] 7 language support
-- [x] 6 platform content generation
+- [x] 12 platform content generation
 - [x] Git commit analysis
 - [x] Conventional commits parsing
 - [x] OpenAI GPT-4o-mini integration
+- [x] Viral optimization for each platform
 - [ ] Claude API support (Anthropic)
 - [ ] Local LLM support (Ollama, LM Studio)
 - [ ] Custom content templates
-- [ ] Direct platform publishing (auto-post to Twitter, LinkedIn)
+- [ ] Direct platform publishing (auto-post to Twitter, LinkedIn, etc.)
 - [ ] VS Code extension
 - [ ] Web dashboard
 - [ ] AI-generated thumbnails/images
 - [ ] Multi-release comparison reports
 - [ ] More languages (Japanese, Portuguese, Italian, Arabic, Hindi)
+- [ ] Slack and Microsoft Teams support
 
 ---
 
@@ -545,6 +613,13 @@ Yes! Set `OPENAI_API_KEY` as an environment variable and run `kronos generate --
 No. Only your commit messages are sent — never your source code.
 
 **Q: Can I generate content for specific platforms only?**  
-Yes: `kronos generate --release v1.0.0 --platforms twitter,linkedin`
+Yes: `kronos generate --release v1.0.0 --platforms twitter,instagram,tiktok,discord`
 
+**Q: What's the difference between WhatsApp and Telegram content?**  
+WhatsApp is optimized for short, emoji-rich messages (1024 chars). Telegram supports longer markdown content (4096 chars) perfect for channels.
 
+**Q: Can Kronos generate TikTok videos?**  
+Kronos generates TikTok **video scripts** with captions, hashtags, and trending sound suggestions. You still need to film/edit the video yourself.
+
+**Q: Does Kronos post content automatically?**  
+Not yet. Currently it generates the content and saves it locally. Auto-posting is on the roadmap.
